@@ -46,7 +46,7 @@ test.js
             var rs=parse(rs);
             console.log(rs);
         })
- ```js
+ ```
  output
  ```js
 { __title: { __title: '测试配置', autohr: 'wolfs', create: '2016/8/30.' },
