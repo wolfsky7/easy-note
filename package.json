@@ -1,0 +1,23 @@
+{
+  "name": "easy-note",
+  "version": "1.0.0",
+  "description": "简单读取一定格式的注释",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wolfsky7/easy-note.git"
+  },
+  "keywords": [
+    "nodejs",
+    "注释"
+  ],
+  "author": "wolfsky7",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wolfsky7/easy-note/issues"
+  },
+  "homepage": "https://github.com/wolfsky7/easy-note#readme"
+}
