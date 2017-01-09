@@ -4,7 +4,7 @@
 
 ```sh
 npm install easy-note
-```sh
+```
 
 ##examples
 test.js
@@ -33,7 +33,7 @@ test.js
  }
 
  module.exports=test;
- ```js
+ ```
  then
  ```js
  var parse=require('easy-note');
@@ -55,5 +55,5 @@ test.js
    { __title: '测试test2',
      p3: 'p3是参数',
      p4: '@@{max:100,min:10,required:1} 这是测试' } }
- ```js
+ ```
 
