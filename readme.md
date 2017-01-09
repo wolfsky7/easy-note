@@ -18,6 +18,7 @@ test.js
     /**测试test1
      * @p1 p1是一个参数
      * @p2 p2是一个string
+     *     补充描述
      */
     this.test1=function(o){
 
