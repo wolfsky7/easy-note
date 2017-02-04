@@ -40,7 +40,6 @@ function parseFile(content){
             var con=funcs[0];
             con=con.substr(con.lastIndexOf('/*'));
             rs[getFunName(con)]=parseNote(defaults.noteRegex.exec(con)[0]);
-            content=content.substr(0,funcs.index)+content.substr(funcs.index+funcs[0].length);
             funcs=r.exec(content);
         }
     }
