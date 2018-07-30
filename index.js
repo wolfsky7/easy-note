@@ -65,23 +65,46 @@ class ParseNote{
         // }
         con=con.substr(index);
         con=con.substr(2,con.length-4);
-        var lines=con.split("\n"),rs={},line,key,lastKey;
+        var lines=con.split("\n"),rs={'__title':''},line,key,lastKey="__title",objStack=[],lastCount=0;
         for(var a in lines){
-            line=this.parseNoteLine(lines[a]);
+            let {line,count}=this.parseNoteLine(lines[a]);
             if(!line)
                 continue;
             key=defaults.propertyRegex.exec(line);
             if(key)
             {
-                lastKey=key[0].trim().replace('@','');
-                rs[lastKey]=line.substr(key[0].length).trim();
+                let l1=line.substr(key[0].length).trim();
+                key=key[0].trim().replace('@','');
+
+                if(!count){
+                    rs[key]={
+                        _text:l1,
+                    }
+                    objStack=[rs[key]]
+                }
+                else{
+                    if(objStack.length){
+                        objStack.slice(-1)[key]={
+                            _text:l1
+                        }
+                    }
+                }
+
+                lastCount=count;
+                if(l1){
+                   
+                }
+                else{
+                    rs[lastKey]={}
+                    
+                }
+                if(count){
+                    objStack.slice(-1)[lastKey]=l1;
+                }
             }
             else{
                 if(lastKey){
                     rs[lastKey] +="\n"+line;
-                }
-                else{
-                    rs['__title'] =line;
                 }
             }
 
@@ -93,7 +116,14 @@ class ParseNote{
         line=(line||'').trim();
     if(line[0]=="*")
         line=line.substr(1);
-    return line.trim();
+    // 找出tab 个数  实现嵌套
+    var i=0,len=line.length,count=0;
+    while(i<len){
+        if(line[i++]=="\t")count++;
+        else break;
+    }
+
+    return {line:line.trim(),count:count};
 
     }
 }
