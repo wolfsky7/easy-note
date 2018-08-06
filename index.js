@@ -65,9 +65,9 @@ class ParseNote{
         // }
         con=con.substr(index);
         con=con.substr(2,con.length-4);
-        var lines=con.split("\n"),rs={'__title':''},line,key,lastKey="__title",objStack=[],lastCount=0;
+        var lines=con.split("\n"),rs={'__title':{_text:''}},key,lastKey="__title";
         for(var a in lines){
-            let {line,count}=this.parseNoteLine(lines[a]);
+            let {line}=this.parseNoteLine(lines[a]);
             if(!line)
                 continue;
             key=defaults.propertyRegex.exec(line);
@@ -76,36 +76,18 @@ class ParseNote{
                 let l1=line.substr(key[0].length).trim();
                 key=key[0].trim().replace('@','');
 
-                if(!count){
+                if(key)
                     rs[key]={
                         _text:l1,
                     }
-                    objStack=[rs[key]]
-                }
                 else{
-                    if(objStack.length){
-                        objStack.slice(-1)[key]={
-                            _text:l1
-                        }
-                    }
+                    rs[lastKey]._text +="\n"+l1;
                 }
 
-                lastCount=count;
-                if(l1){
-                   
-                }
-                else{
-                    rs[lastKey]={}
-                    
-                }
-                if(count){
-                    objStack.slice(-1)[lastKey]=l1;
-                }
+                lastKey=key;
             }
             else{
-                if(lastKey){
-                    rs[lastKey] +="\n"+line;
-                }
+                rs[lastKey]._text +="\n"+line;
             }
 
         }
